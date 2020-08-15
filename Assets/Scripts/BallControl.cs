@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -28,6 +27,9 @@ public class BallControl : MonoBehaviour
         rigidbody2D.velocity = Vector2.zero;
     }
 
+    /// <summary>
+    /// Push Ball to random direction
+    /// </summary>
     private void PushBall()
     {
         // Set random initial force
@@ -49,6 +51,9 @@ public class BallControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restart game 
+    /// </summary>
     private void RestartGame()
     {
         ResetBall(); // Reset ball
