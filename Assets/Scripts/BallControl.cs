@@ -39,16 +39,9 @@ public class BallControl : MonoBehaviour
         float randomDirection = Random.Range(0, 2);
 
         // If randomDirection is lower than 1, ...
-        if (randomDirection < 1f)
-        {
-            // Move ball to the left
-            rigidbody2D.AddForce(new Vector2(-xInitialForce, yRandomInitialForce));
-        }
-        else
-        {
-            // Move ball to the right
-            rigidbody2D.AddForce(new Vector2(xInitialForce, yRandomInitialForce));
-        }
+        rigidbody2D.AddForce(randomDirection < 1f
+            ? new Vector2(-xInitialForce, yRandomInitialForce) // Move to the left
+            : new Vector2(xInitialForce, yRandomInitialForce)); // Else, move to the right
     }
 
     /// <summary>
