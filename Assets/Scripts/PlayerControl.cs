@@ -12,7 +12,11 @@ public class PlayerControl : MonoBehaviour
 
     private Rigidbody2D rigidbody2D;
     private int score;
-    
+    // Last contact point with ball 
+    private ContactPoint2D lastContactPoint;
+
+    public ContactPoint2D LastContactPoint => lastContactPoint;
+
     public int Score => score; // Getter score
 
     private void Start()
@@ -48,6 +52,15 @@ public class PlayerControl : MonoBehaviour
             position.y = -yBoundary; // Set position to -yBoundary
 
         transform.position = position; // Update position
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        // If player collides with ball, record contact point
+        if (other.gameObject.name.Equals("Ball"))
+        {
+            lastContactPoint = other.GetContact(0);
+        }
     }
 
     /// <summary>

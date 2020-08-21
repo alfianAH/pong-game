@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -8,11 +9,24 @@ public class BallControl : MonoBehaviour
         yInitialForce = 15;
     
     private Rigidbody2D rigidbody2D;
+    private Vector2 trajectoryOrigin;
+
+    public Vector2 TrajectoryOrigin => trajectoryOrigin;
 
     private void Start()
     {
+        trajectoryOrigin = transform.position;
         rigidbody2D = GetComponent<Rigidbody2D>();
         RestartGame();
+    }
+
+    /// <summary>
+    /// When ball collide with others, record contact point
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        trajectoryOrigin = transform.position;
     }
 
     /// <summary>
