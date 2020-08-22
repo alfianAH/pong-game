@@ -1,0 +1,92 @@
+﻿using UnityEngine;
+
+public class Trajectory : MonoBehaviour
+{
+    // Ball's components
+    public BallControl ball;
+    private CircleCollider2D ballCollider;
+    private Rigidbody2D ballRigidbody;
+
+    public GameObject ballAtCollision;  // Shadow ball
+    
+    private void Start()
+    {
+        ballCollider = ball.GetComponent<CircleCollider2D>();
+        ballRigidbody = ball.GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        // Initiate the path bounce state
+        // which will only be displayed if the track collides
+        // with a specific object
+        bool drawBallAtCollision = false;
+        Vector2 offsetHitPoint = new Vector2();
+        
+        // Set the point of collision with circle movement detection 
+        RaycastHit2D[] circleCastHit2Ds = Physics2D.CircleCastAll(ballRigidbody.position, ballCollider.radius,
+            ballRigidbody.velocity.normalized);
+
+        foreach (RaycastHit2D circleCastHit2D in circleCastHit2Ds)
+        {
+            // If there is a collision and the collision is not with the ball, ...
+            // (Because the trajectory is drawn from the center of the ball)
+            if (circleCastHit2D.collider != null && circleCastHit2D.collider.GetComponent<BallControl>() == null)
+            {
+                // A trajectory will be drawn from the center of the current ball to the center of the 
+                // ball at collision,
+                // Which is a point offset from the point of collision based on the normal vector
+                // as big as the radius of the ball.
+                
+                // Set hitPoint
+                Vector2 hitPoint = circleCastHit2D.point;
+                
+                // Set hitNormal in hitPoint
+                Vector2 hitNormal = circleCastHit2D.normal;
+                
+                // Set offsetHitPoint, which is the center point of the ball at collision
+                offsetHitPoint = hitPoint + hitNormal * ballCollider.radius;
+                
+                // Draw dotted line from the center of the current ball to the center of ballAtCollision
+                DottedLine.DottedLine.Instance.DrawDottedLine(ball.transform.position, offsetHitPoint);
+                
+                // If not sideWall, draw the reflection
+                if (circleCastHit2D.collider.GetComponent<SideWall>() == null)
+                {
+                    // Calculate inVector
+                    Vector2 inVector = (offsetHitPoint - ball.TrajectoryOrigin).normalized;
+                    
+                    // Calculate outVector
+                    Vector2 outVector = Vector2.Reflect(inVector, hitNormal);
+                    
+                    // Calculate dot product from outVector and hitNormal.
+                    // Is used so that the trajectory line when there is a collision, line will not be drawn
+                    float outDot = Vector2.Dot(outVector, hitNormal);
+                    if (outDot > -1.0f && outDot < 1.0f)
+                    {
+                        // Draw reflection trajectory
+                        DottedLine.DottedLine.Instance.DrawDottedLine(
+                            offsetHitPoint,
+                            offsetHitPoint + outVector*10f);
+                        // To draw shadow ball in hit point
+                        drawBallAtCollision = true;
+                    }
+                }
+                // Only draw trajectory for 1 hit point, so get out from the loop....
+                break;
+            }
+        }
+
+        if (drawBallAtCollision)
+        {
+            // Draw shadow ball in hit point prediction
+            ballAtCollision.transform.position = offsetHitPoint;
+            ballAtCollision.SetActive(true);
+        }
+        else
+        {
+            // Hide shadow ball
+            ballAtCollision.SetActive(false);
+        }
+    }
+}

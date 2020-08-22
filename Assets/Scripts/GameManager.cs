@@ -1,8 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // Trajectory for drawing ball trajectory prediction
+    public Trajectory trajectory;
+    
     // Player 1
     public PlayerControl player1;
     private Rigidbody2D player1Rigidbody;
@@ -106,6 +108,9 @@ public class GameManager : MonoBehaviour
         
         // Update isDebugWindowShown when player click the button
         if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height - 73, 120, 53), "TOGGLE\nDEBUG INFO"))
+        {
             isDebugWindowShown = !isDebugWindowShown;
+            trajectory.enabled = !trajectory.enabled;
+        }
     }
 }
