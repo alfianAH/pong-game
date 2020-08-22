@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01add2a699982974887a0967ce489e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xInitialForce: 50
+  xInitialForce: 70
   yInitialForce: 15
 --- !u!58 &499353780
 CircleCollider2D:
@@ -356,11 +356,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: c2b86485e2a51ff4ca70fc72bd9f96ef, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

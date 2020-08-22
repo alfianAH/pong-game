@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -39,6 +38,7 @@ public class BallControl : MonoBehaviour
         
         // Reset velocity to (0,0)
         rigidbody2D.velocity = Vector2.zero;
+        Debug.Log(rigidbody2D.velocity);
     }
 
     /// <summary>
@@ -64,6 +64,6 @@ public class BallControl : MonoBehaviour
     private void RestartGame()
     {
         ResetBall(); // Reset ball
-        Invoke(nameof(PushBall), 2f);
+        Invoke("PushBall", 2f);
     }
 }
