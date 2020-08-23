@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -17,6 +18,17 @@ public class BallControl : MonoBehaviour
         trajectoryOrigin = transform.position;
         rigidbody2D = GetComponent<Rigidbody2D>();
         RestartGame();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            float angle = (transform.position.y - other.transform.position.y);
+            Vector2 direction = new Vector2(rigidbody2D.velocity.x, angle).normalized;
+            rigidbody2D.velocity = Vector2.zero;
+            rigidbody2D.AddForce(direction * xInitialForce);
+        }
     }
 
     /// <summary>
