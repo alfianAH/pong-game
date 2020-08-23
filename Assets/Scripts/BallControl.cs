@@ -38,7 +38,6 @@ public class BallControl : MonoBehaviour
         
         // Reset velocity to (0,0)
         rigidbody2D.velocity = Vector2.zero;
-        Debug.Log(rigidbody2D.velocity);
     }
 
     /// <summary>
