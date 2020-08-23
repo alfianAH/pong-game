@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -18,17 +17,6 @@ public class BallControl : MonoBehaviour
         trajectoryOrigin = transform.position;
         rigidbody2D = GetComponent<Rigidbody2D>();
         RestartGame();
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            float angle = (transform.position.y - other.transform.position.y);
-            Vector2 direction = new Vector2(rigidbody2D.velocity.x, angle).normalized;
-            rigidbody2D.velocity = Vector2.zero;
-            rigidbody2D.AddForce(direction * xInitialForce);
-        }
     }
 
     /// <summary>
@@ -58,15 +46,15 @@ public class BallControl : MonoBehaviour
     private void PushBall()
     {
         // Set random initial force
-        float yRandomInitialForce = Random.Range(-yInitialForce, yInitialForce);
+        // float yRandomInitialForce = Random.Range(-yInitialForce, yInitialForce);
         
         // Set randomDirection
         float randomDirection = Random.Range(0, 2);
-
+        
         // If randomDirection is lower than 1, ...
         rigidbody2D.AddForce(randomDirection < 1f
-            ? new Vector2(-xInitialForce, yRandomInitialForce) // Move to the left
-            : new Vector2(xInitialForce, yRandomInitialForce)); // Else, move to the right
+            ? new Vector2(-xInitialForce, yInitialForce) // Move to the left
+            : new Vector2(xInitialForce, yInitialForce)); // Else, move to the right
     }
 
     /// <summary>
