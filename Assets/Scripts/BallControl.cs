@@ -60,7 +60,7 @@ public class BallControl : MonoBehaviour
     /// <summary>
     /// Restart game 
     /// </summary>
-    private void RestartGame()
+    public void RestartGame()
     {
         ResetBall(); // Reset ball
         Invoke("PushBall", 2f);

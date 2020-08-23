@@ -1,11 +1,20 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
+    [SerializeField] private Slider powerUp;
+    [SerializeField] private float hitPowerUp,
+        scorePowerUp;
+    [SerializeField] private BallControl ball;
+    
     // Buttons to move
     public KeyCode upButton = KeyCode.W,
         downButton = KeyCode.S;
+    
+    // KeyCode Power Up
+    public KeyCode powerUpKey;
 
     public float speed = 10f, // Bat speed
         yBoundary = 9f; // y axis boundary
@@ -17,6 +26,8 @@ public class PlayerControl : MonoBehaviour
 
     public ContactPoint2D LastContactPoint => lastContactPoint;
 
+    private bool canUsePowerUp;
+    
     public int Score => score; // Getter score
 
     private void Start()
@@ -52,14 +63,30 @@ public class PlayerControl : MonoBehaviour
             position.y = -yBoundary; // Set position to -yBoundary
 
         transform.position = position; // Update position
+        
+        // Power Up
+        if (Input.GetKeyDown(powerUpKey) && powerUp.value >= 1)
+        {
+            StartCoroutine(PowerUpDecreaseAnimation(0.05f));
+            IncrementScore();
+            ball.RestartGame();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         // If player collides with ball, record contact point
-        if (other.gameObject.name.Equals("Ball"))
+        if (!other.gameObject.name.Equals("Ball")) return;
+        powerUp.value += hitPowerUp;
+        lastContactPoint = other.GetContact(0);
+    }
+
+    private IEnumerator PowerUpDecreaseAnimation(float waitTime)
+    {
+        for (float i = powerUp.value; i >= 0; i-=0.1f)
         {
-            lastContactPoint = other.GetContact(0);
+            powerUp.value = i;
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
@@ -69,6 +96,7 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
+        powerUp.value += scorePowerUp;
     }
 
     /// <summary>

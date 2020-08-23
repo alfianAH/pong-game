@@ -143,7 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336ecec69c6ddc74abe42cb11a99fe6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUp: {fileID: 0}
+  hitPowerUp: 0.1
+  scorePowerUp: 0.15
+  ball: {fileID: 0}
   upButton: 119
   downButton: 115
+  powerUpKey: 0
   speed: 10
   yBoundary: 9
