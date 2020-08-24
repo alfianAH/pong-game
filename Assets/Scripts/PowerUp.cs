@@ -7,11 +7,11 @@ public class PowerUp : MonoBehaviour
         player2;
     [SerializeField] private BallControl ball;
     [SerializeField] private float maxLength = 5f,
-        powerUpMaxTime = 5f;
+        powerUpMaxTime = 5f,
+        xBoundary = 3f;
 
-    private CircleCollider2D powerUpCollider;
-    private Vector3 player1OriginScale,
-        player2OriginScale;
+    private Vector3 playerOriginScale;
+    private Transform powerUpTransform;
     private Transform player1Transform,
         player2Transform;
     private bool isPlayer1, isPlayer2;
@@ -19,15 +19,13 @@ public class PowerUp : MonoBehaviour
     
     private void Awake()
     {
-        powerUpCollider = GetComponent<CircleCollider2D>();
-        
+        powerUpTransform = GetComponent<Transform>();
         yBoundaryOrigin = player1.yBoundary;
         
         player1Transform = player1.GetComponent<Transform>();
         player2Transform = player2.GetComponent<Transform>();
         
-        player1OriginScale = player1Transform.localScale;
-        player2OriginScale = player2Transform.localScale;
+        playerOriginScale = player1Transform.localScale;
     }
 
     private void Update()
@@ -77,8 +75,10 @@ public class PowerUp : MonoBehaviour
         }
         
         playerControl.yBoundary = 5f; // Change y boundary of player
-        powerUpCollider.enabled = false; // Disable this object's collider
-        
+        // Make random position of power up
+        powerUpTransform.position = new Vector2(Random.Range(-xBoundary, xBoundary), 
+            Random.Range(-yBoundaryOrigin, yBoundaryOrigin));
+
         isPlayer1 = false;
         isPlayer2 = false;
         
@@ -86,7 +86,7 @@ public class PowerUp : MonoBehaviour
         yield return new WaitForSeconds(powerUpMaxTime);
         
         // Back to normal
-        for (float i = player.localScale.y; i >= player1OriginScale.y; i-=0.1f)
+        for (float i = player.localScale.y; i >= playerOriginScale.y; i-=0.1f)
         {
             player.localScale = new Vector2(player.localScale.x, i);
             yield return new WaitForSeconds(waitTime);
