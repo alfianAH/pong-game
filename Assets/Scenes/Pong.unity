@@ -335,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 422648959}
   - component: {fileID: 422648958}
+  - component: {fileID: 422648960}
   - component: {fileID: 422648957}
   m_Layer: 0
   m_Name: PowerUp
@@ -355,6 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f7474e85fd5224a94b9db6e6361594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 4972319875677552087}
+  player2: {fileID: 117290857}
+  ball: {fileID: 499353779}
+  maxLength: 5
+  powerUpMaxTime: 5
 --- !u!212 &422648958
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -413,12 +419,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422648956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.41, z: 0}
+  m_LocalPosition: {x: -3.09, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &422648960
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422648956}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &455700865
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +680,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xInitialForce: 70
-  yInitialForce: 15
+  yInitialForce: 0
+  isPlayer1: 0
+  isPlayer2: 0
 --- !u!58 &499353780
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -6,9 +7,15 @@ public class BallControl : MonoBehaviour
     // Initial Force to push the ball
     public float xInitialForce = 50,
         yInitialForce = 15;
+
+    [SerializeField] private bool isPlayer1,
+        isPlayer2;
     
     private Rigidbody2D rigidbody2D;
     private Vector2 trajectoryOrigin;
+
+    public bool IsPlayer1 => isPlayer1;
+    public bool IsPlayer2 => isPlayer2;
 
     public Vector2 TrajectoryOrigin => trajectoryOrigin;
 
@@ -17,6 +24,26 @@ public class BallControl : MonoBehaviour
         trajectoryOrigin = transform.position;
         rigidbody2D = GetComponent<Rigidbody2D>();
         RestartGame();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        // If other game object is player, ...
+        if (!other.gameObject.CompareTag("Player")) return;
+        // Check player's name
+        switch (other.gameObject.name)
+        {
+            // If Player1, ...
+            case "Player1":
+                isPlayer1 = true; // Set isPlayer1 to true 
+                isPlayer2 = false; // Set isPlayer2 to false
+                break;
+            // If Player2, ...
+            case "Player2":
+                isPlayer1 = false; // Set isPlayer1 to false
+                isPlayer2 = true; // Set isPlayer2 to true
+                break;
+        }
     }
 
     /// <summary>
