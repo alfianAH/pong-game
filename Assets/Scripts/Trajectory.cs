@@ -61,7 +61,7 @@ public class Trajectory : MonoBehaviour
                 
                 // Calculate outVector
                 Vector2 outVector = Vector2.zero;
-                if(circleCastHit2D.collider.GetComponent<PlayerControl>() != null)
+                if(circleCastHit2D.collider.CompareTag("Player"))
                 {
                     /*
                      * float angle = (transform.position.y - other.transform.position.y) * 5f;
