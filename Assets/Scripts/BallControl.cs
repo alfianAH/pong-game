@@ -44,6 +44,23 @@ public class BallControl : MonoBehaviour
                 isPlayer2 = true; // Set isPlayer2 to true
                 break;
         }
+        
+        // Change ball's angle when hit bat (player)
+        /* Illustration
+         * bat   ball
+         * |-|  /y = 5
+         * | | /
+         * | |/
+         * | |---y = 0
+         * | |\
+         * | | \
+         * |-|  \y = -4
+         * bat   ball
+         */
+        float angle = (transform.position.y - other.transform.position.y) * 5f;
+        Vector2 direction = new Vector2(rigidbody2D.velocity.x, angle).normalized;
+        rigidbody2D.velocity = Vector2.zero;
+        rigidbody2D.AddForce(direction*xInitialForce);
     }
 
     /// <summary>

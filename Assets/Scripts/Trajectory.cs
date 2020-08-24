@@ -5,13 +5,15 @@ public class Trajectory : MonoBehaviour
     // Ball's components
     public BallControl ball;
     private CircleCollider2D ballCollider;
+    private Transform ballTransform;
     private Rigidbody2D ballRigidbody;
 
-    public GameObject ballAtCollision, // Shadow ball
-        powerUpObject;
+    public Transform ballAtCollision; // Shadow ball
+    public GameObject powerUpObject;
     
     private void Start()
     {
+        ballTransform = ball.GetComponent<Transform>();
         ballCollider = ball.GetComponent<CircleCollider2D>();
         ballRigidbody = ball.GetComponent<Rigidbody2D>();
     }
@@ -41,13 +43,13 @@ public class Trajectory : MonoBehaviour
                 
             // Set hitPoint
             Vector2 hitPoint = circleCastHit2D.point;
-                
+            
             // Set hitNormal in hitPoint
             Vector2 hitNormal = circleCastHit2D.normal;
-                
+            
             // Set offsetHitPoint, which is the center point of the ball at collision
             offsetHitPoint = hitPoint + hitNormal * ballCollider.radius;
-                
+            
             // Draw dotted line from the center of the current ball to the center of ballAtCollision
             DottedLine.DottedLine.Instance.DrawDottedLine(ball.transform.position, offsetHitPoint);
             
@@ -59,11 +61,24 @@ public class Trajectory : MonoBehaviour
                 Vector2 inVector = (offsetHitPoint - ball.TrajectoryOrigin).normalized;
                 
                 // Calculate outVector
-                Vector2 outVector = Vector2.Reflect(inVector, hitNormal);
-                    
+                Vector2 outVector = Vector2.zero;
+                if(circleCastHit2D.collider.GetComponent<PlayerControl>() != null)
+                {
+                    /*
+                     * float angle = (transform.position.y - other.transform.position.y) * 5f;
+                     * Vector2 direction = new Vector2(rigidbody2D.velocity.x, angle).normalized;
+                     */
+                    float angle = (ballAtCollision.position.y - circleCastHit2D.transform.position.y) * 5f;
+                    outVector = new Vector2(-ballRigidbody.velocity.x, angle).normalized;
+                }
+                else
+                {
+                    outVector = Vector2.Reflect(inVector, hitNormal);
+                }
                 // Calculate dot product from outVector and hitNormal.
                 // Is used so that the trajectory line when there is a collision, line will not be drawn
                 float outDot = Vector2.Dot(outVector, hitNormal);
+                
                 if (outDot > -1.0f && outDot < 1.0f)
                 {
                     // Draw reflection trajectory
@@ -81,13 +96,13 @@ public class Trajectory : MonoBehaviour
         if (drawBallAtCollision)
         {
             // Draw shadow ball in hit point prediction
-            ballAtCollision.transform.position = offsetHitPoint;
-            ballAtCollision.SetActive(true);
+            ballAtCollision.position = offsetHitPoint;
+            ballAtCollision.gameObject.SetActive(true);
         }
         else
         {
             // Hide shadow ball
-            ballAtCollision.SetActive(false);
+            ballAtCollision.gameObject.SetActive(false);
         }
     }
 }

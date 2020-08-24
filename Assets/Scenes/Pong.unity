@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xInitialForce: 70
-  yInitialForce: 15
+  yInitialForce: 0
   isPlayer1: 0
   isPlayer2: 0
 --- !u!58 &499353780
@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 499353779}
-  ballAtCollision: {fileID: 957267001}
+  ballAtCollision: {fileID: 957267003}
   powerUpObject: {fileID: 422648956}
 --- !u!114 &1054538034
 MonoBehaviour:
