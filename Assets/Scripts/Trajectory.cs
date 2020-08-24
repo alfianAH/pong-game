@@ -54,8 +54,7 @@ public class Trajectory : MonoBehaviour
             DottedLine.DottedLine.Instance.DrawDottedLine(ball.transform.position, offsetHitPoint);
             
             // If not sideWall and not power up object, draw the reflection
-            if (circleCastHit2D.collider.GetComponent<SideWall>() == null &&
-                circleCastHit2D.collider.gameObject != powerUpObject)
+            if (!circleCastHit2D.collider.CompareTag("NoReflection"))
             {
                 // Calculate inVector
                 Vector2 inVector = (offsetHitPoint - ball.TrajectoryOrigin).normalized;
