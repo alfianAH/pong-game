@@ -26,6 +26,9 @@ public class PowerUp : MonoBehaviour
         player2Transform = player2.GetComponent<Transform>();
         
         playerOriginScale = player1Transform.localScale;
+        // Make random position of power up
+        powerUpTransform.position = new Vector2(Random.Range(-xBoundary, xBoundary), 
+            Random.Range(-yBoundaryOrigin, yBoundaryOrigin));
     }
 
     private void Update()
@@ -46,14 +49,10 @@ public class PowerUp : MonoBehaviour
         if (!other.GetComponent<BallControl>()) return;
         // Check if Player 1 hits the ball, ...
         if (ball.IsPlayer1 && !ball.IsPlayer2)
-        {
             isPlayer1 = true;
-        }
         // Check if Player 2 hits the ball, ...
         else if (!ball.IsPlayer1 && ball.IsPlayer2)
-        {
             isPlayer2 = true;
-        }
     }
 
     /// <summary>
@@ -75,12 +74,13 @@ public class PowerUp : MonoBehaviour
         }
         
         playerControl.yBoundary = 5f; // Change y boundary of player
+        
+        isPlayer1 = false;
+        isPlayer2 = false;
+        
         // Make random position of power up
         powerUpTransform.position = new Vector2(Random.Range(-xBoundary, xBoundary), 
             Random.Range(-yBoundaryOrigin, yBoundaryOrigin));
-
-        isPlayer1 = false;
-        isPlayer2 = false;
         
         // Limit power up time
         yield return new WaitForSeconds(powerUpMaxTime);
@@ -91,7 +91,7 @@ public class PowerUp : MonoBehaviour
             player.localScale = new Vector2(player.localScale.x, i);
             yield return new WaitForSeconds(waitTime);
         }
-            
+        
         playerControl.yBoundary = yBoundaryOrigin;
     }
 }
