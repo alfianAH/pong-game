@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] private Slider powerUp;
+    [SerializeField] private Slider ultiPowerUp;
     [SerializeField] private float hitPowerUp,
         scorePowerUp;
     [SerializeField] private BallControl ball;
@@ -65,7 +65,7 @@ public class PlayerControl : MonoBehaviour
         transform.position = position; // Update position
         
         // Power Up
-        if (Input.GetKeyDown(powerUpKey) && powerUp.value >= 1)
+        if (Input.GetKeyDown(powerUpKey) && ultiPowerUp.value >= 1)
         {
             StartCoroutine(PowerUpDecreaseAnimation(0.05f));
             IncrementScore();
@@ -77,15 +77,15 @@ public class PlayerControl : MonoBehaviour
     {
         // If player collides with ball, record contact point
         if (!other.gameObject.name.Equals("Ball")) return;
-        powerUp.value += hitPowerUp;
+        ultiPowerUp.value += hitPowerUp;
         lastContactPoint = other.GetContact(0);
     }
 
     private IEnumerator PowerUpDecreaseAnimation(float waitTime)
     {
-        for (float i = powerUp.value; i >= 0; i-=0.1f)
+        for (float i = ultiPowerUp.value; i >= 0; i-=0.1f)
         {
-            powerUp.value = i;
+            ultiPowerUp.value = i;
             yield return new WaitForSeconds(waitTime);
         }
     }
@@ -96,7 +96,7 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
-        powerUp.value += scorePowerUp;
+        ultiPowerUp.value += scorePowerUp;
     }
 
     /// <summary>
@@ -105,5 +105,6 @@ public class PlayerControl : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
+        ultiPowerUp.value = 0; // Reset power
     }
 }

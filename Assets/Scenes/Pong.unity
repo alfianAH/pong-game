@@ -158,6 +158,11 @@ PrefabInstance:
       propertyPath: ball
       value: 
       objectReference: {fileID: 499353779}
+    - target: {fileID: 4524045861609855307, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
+        type: 3}
+      propertyPath: ultiPowerUp
+      value: 
+      objectReference: {fileID: 328183055}
     - target: {fileID: 8066285181652373654, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
         type: 3}
       propertyPath: m_Name
@@ -1793,6 +1798,11 @@ PrefabInstance:
       propertyPath: powerUpKey
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 4524045861609855307, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
+        type: 3}
+      propertyPath: ultiPowerUp
+      value: 
+      objectReference: {fileID: 479568972}
     - target: {fileID: 8066285181652373654, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
         type: 3}
       propertyPath: m_Name
