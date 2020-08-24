@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Text homeBtn;
+    
     // Trajectory for drawing ball trajectory prediction
     public Trajectory trajectory;
     
@@ -20,7 +23,7 @@ public class GameManager : MonoBehaviour
     
     // Max score
     public int maxScore;
-
+    
     private bool isDebugWindowShown = false;
 
     private void Start()
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
         {
             // Show "Player One Won" on the left side
             GUI.Label(new Rect(Screen.width/2 - 150, Screen.height/2 - 10, 2000, 1000), "Player One Won");
-            
+            homeBtn.gameObject.SetActive(true);
             // Reset ball to the center
             ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
         } 
@@ -64,7 +67,7 @@ public class GameManager : MonoBehaviour
         {
             // Show "Player Two Won" on the right side
             GUI.Label(new Rect(Screen.width/2 + 30, Screen.height/2 - 10, 2000, 1000), "Player Two Won");
-            
+            homeBtn.gameObject.SetActive(true);
             // Reset ball to the center
             ball.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -10,6 +11,8 @@ public class BallControl : MonoBehaviour
 
     [SerializeField] private bool isPlayer1,
         isPlayer2;
+
+    [SerializeField] private Text homeBtn;
     
     private Rigidbody2D rigidbody2D;
     private Vector2 trajectoryOrigin;
@@ -106,6 +109,10 @@ public class BallControl : MonoBehaviour
     /// </summary>
     public void RestartGame()
     {
+        if (homeBtn.gameObject.activeInHierarchy)
+        {
+            homeBtn.gameObject.SetActive(false);
+        }
         ResetBall(); // Reset ball
         Invoke("PushBall", 2f);
     }

@@ -18,4 +18,12 @@ public class SceneLoader : MonoBehaviour
     {
         Application.Quit();
     }
+
+    /// <summary>
+    /// Back to home
+    /// </summary>
+    public void BackToHome()
+    {
+        SceneManager.LoadScene("OpeningScene");
+    }
 }
