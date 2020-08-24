@@ -1293,6 +1293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 499353779}
   ballAtCollision: {fileID: 957267001}
+  powerUpObject: {fileID: 422648956}
 --- !u!114 &1054538034
 MonoBehaviour:
   m_ObjectHideFlags: 0

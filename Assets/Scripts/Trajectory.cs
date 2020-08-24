@@ -7,7 +7,8 @@ public class Trajectory : MonoBehaviour
     private CircleCollider2D ballCollider;
     private Rigidbody2D ballRigidbody;
 
-    public GameObject ballAtCollision;  // Shadow ball
+    public GameObject ballAtCollision, // Shadow ball
+        powerUpObject;
     
     private void Start()
     {
@@ -50,12 +51,13 @@ public class Trajectory : MonoBehaviour
             // Draw dotted line from the center of the current ball to the center of ballAtCollision
             DottedLine.DottedLine.Instance.DrawDottedLine(ball.transform.position, offsetHitPoint);
             
-            // If not sideWall, draw the reflection
-            if (circleCastHit2D.collider.GetComponent<SideWall>() == null)
+            // If not sideWall and not power up object, draw the reflection
+            if (circleCastHit2D.collider.GetComponent<SideWall>() == null &&
+                circleCastHit2D.collider.gameObject != powerUpObject)
             {
                 // Calculate inVector
                 Vector2 inVector = (offsetHitPoint - ball.TrajectoryOrigin).normalized;
-                    
+                
                 // Calculate outVector
                 Vector2 outVector = Vector2.Reflect(inVector, hitNormal);
                     
