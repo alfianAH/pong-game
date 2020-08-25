@@ -26,6 +26,12 @@ public class GameManager : MonoBehaviour
     
     private bool isDebugWindowShown = false;
 
+    public bool IsDebugWindowShown
+    {
+        get => isDebugWindowShown;
+        set => isDebugWindowShown = value;
+    }
+
     private void Start()
     {
         // Get components
