@@ -96,6 +96,8 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
+        ball.IsPlayer1 = false;
+        ball.IsPlayer2 = false;
         ultiPowerUp.value += scorePowerUp;
     }
 

@@ -17,8 +17,17 @@ public class BallControl : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private Vector2 trajectoryOrigin;
 
-    public bool IsPlayer1 => isPlayer1;
-    public bool IsPlayer2 => isPlayer2;
+    public bool IsPlayer1
+    {
+        get => isPlayer1;
+        set => isPlayer1 = value;
+    }
+
+    public bool IsPlayer2
+    {
+        get => isPlayer2;
+        set => isPlayer2 = value;
+    }
 
     public Vector2 TrajectoryOrigin => trajectoryOrigin;
 
