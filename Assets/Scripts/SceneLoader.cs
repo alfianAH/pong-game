@@ -26,7 +26,7 @@ public class SceneLoader : MonoBehaviour
         
         while(!asyncLoad.isDone)
         {
-            loadingText.text = $"{asyncLoad.progress}%";
+            loadingText.text = $"{asyncLoad.progress*100}%";
             yield return null;
         }
     }
