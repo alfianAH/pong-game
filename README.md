@@ -16,6 +16,11 @@ This is just a simple ping-pong game with a little modification.
 4. And finally it will be cloned to your computer.
 5. Open it with Unity (Recommended Unity 2019.3)
 
+## How to play
+1. Player 1's movements are "W" Key (for up), "S" Key (for down), and Space Key (for ultimate skill)
+2. Player 2's movements are UpArrow Key (for up), DownArrow Key (for down), and LeftArrow Key (for ultimate skill)
+3. You can see game's debug info when you press  "Toggle Debug Info" button.
+
 ## Example game
 
 ![Gameplay](/Images/pong.jpg)
