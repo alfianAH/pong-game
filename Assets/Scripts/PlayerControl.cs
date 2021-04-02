@@ -27,7 +27,7 @@ public class PlayerControl : MonoBehaviour
     public float speed = 10f, // Bat speed
         yBoundary = 9f; // y axis boundary
 
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rb2D;
     private int score;
     // Last contact point with ball 
     private ContactPoint2D lastContactPoint;
@@ -40,13 +40,13 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         // Get bat's current speed
-        Vector2 velocity = rigidbody2D.velocity;
+        Vector2 velocity = rb2D.velocity;
 
         // If player presses the upButton, ...
         if (Input.GetKey(upButton))
@@ -58,7 +58,7 @@ public class PlayerControl : MonoBehaviour
         else
             velocity.y = 0f;
         
-        rigidbody2D.velocity = velocity; // Update velocity
+        rb2D.velocity = velocity; // Update velocity
 
         // Get bat's current position
         Vector3 position = transform.position;

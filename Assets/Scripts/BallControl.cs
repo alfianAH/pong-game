@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BallControl : MonoBehaviour
@@ -12,7 +10,7 @@ public class BallControl : MonoBehaviour
     [SerializeField] private bool isPlayer1,
         isPlayer2;
 
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rb2D;
     private Vector2 trajectoryOrigin;
 
     public bool IsPlayer1
@@ -32,7 +30,7 @@ public class BallControl : MonoBehaviour
     private void Start()
     {
         trajectoryOrigin = transform.position;
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         RestartGame();
     }
 
@@ -44,12 +42,12 @@ public class BallControl : MonoBehaviour
         switch (other.gameObject.name)
         {
             // If Player1, ...
-            case "Player1":
+            case "Player 1":
                 isPlayer1 = true; // Set isPlayer1 to true 
                 isPlayer2 = false; // Set isPlayer2 to false
                 break;
             // If Player2, ...
-            case "Player2":
+            case "Player 2":
                 isPlayer1 = false; // Set isPlayer1 to false
                 isPlayer2 = true; // Set isPlayer2 to true
                 break;
@@ -68,9 +66,9 @@ public class BallControl : MonoBehaviour
          * bat   ball
          */
         float angle = (transform.position.y - other.transform.position.y) * 5f;
-        Vector2 direction = new Vector2(rigidbody2D.velocity.x, angle).normalized;
-        rigidbody2D.velocity = Vector2.zero;
-        rigidbody2D.AddForce(direction*xInitialForce);
+        Vector2 direction = new Vector2(rb2D.velocity.x, angle).normalized;
+        rb2D.velocity = Vector2.zero;
+        rb2D.AddForce(direction*xInitialForce);
     }
 
     /// <summary>
@@ -91,7 +89,7 @@ public class BallControl : MonoBehaviour
         transform.position = Vector2.zero;
         
         // Reset velocity to (0,0)
-        rigidbody2D.velocity = Vector2.zero;
+        rb2D.velocity = Vector2.zero;
     }
 
     /// <summary>
@@ -106,7 +104,7 @@ public class BallControl : MonoBehaviour
         float randomDirection = Random.Range(0, 2);
         
         // If randomDirection is lower than 1, ...
-        rigidbody2D.AddForce(randomDirection < 1f
+        rb2D.AddForce(randomDirection < 1f
             ? new Vector2(-xInitialForce, yInitialForce) // Move to the left
             : new Vector2(xInitialForce, yInitialForce)); // Else, move to the right
     }

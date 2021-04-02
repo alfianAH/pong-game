@@ -73,7 +73,7 @@ public class PowerUp : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         
-        playerControl.yBoundary = 5f; // Change y boundary of player
+        playerControl.yBoundary = yBoundaryOrigin/2; // Change y boundary of player
         
         isPlayer1 = false;
         isPlayer2 = false;

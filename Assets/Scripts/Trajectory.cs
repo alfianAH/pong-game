@@ -5,15 +5,12 @@ public class Trajectory : MonoBehaviour
     // Ball's components
     public BallControl ball;
     private CircleCollider2D ballCollider;
-    private Transform ballTransform;
     private Rigidbody2D ballRigidbody;
 
     public Transform ballAtCollision; // Shadow ball
-    public GameObject powerUpObject;
     
     private void Start()
     {
-        ballTransform = ball.GetComponent<Transform>();
         ballCollider = ball.GetComponent<CircleCollider2D>();
         ballRigidbody = ball.GetComponent<Rigidbody2D>();
     }
