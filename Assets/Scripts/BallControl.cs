@@ -12,7 +12,8 @@ public class BallControl : MonoBehaviour
 
     private Rigidbody2D rb2D;
     private Vector2 trajectoryOrigin;
-
+    public float xInitialForceOrigin;
+    
     public bool IsPlayer1
     {
         get => isPlayer1;
@@ -29,6 +30,8 @@ public class BallControl : MonoBehaviour
 
     private void Start()
     {
+        xInitialForceOrigin = xInitialForce;
+        
         trajectoryOrigin = transform.position;
         rb2D = GetComponent<Rigidbody2D>();
         RestartGame();
@@ -115,6 +118,8 @@ public class BallControl : MonoBehaviour
     public void RestartGame()
     {
         ResetBall(); // Reset ball
+        xInitialForce = xInitialForceOrigin;
+        
         Invoke("PushBall", 2f);
     }
 }

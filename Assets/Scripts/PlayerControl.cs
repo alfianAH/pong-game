@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour
 {
     [Header("User Interface")]
-    [SerializeField] private Slider ultiPowerUp;
+    [SerializeField] private Slider ultiSlider;
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject transparentBg;
     [SerializeField] private Text gamePausedText;
@@ -73,11 +73,10 @@ public class PlayerControl : MonoBehaviour
         transform.position = position; // Update position
         
         // Power Up
-        if (Input.GetKeyDown(powerUpKey) && ultiPowerUp.value >= 1)
+        if (Input.GetKeyDown(powerUpKey) && ultiSlider.value >= 1)
         {
             StartCoroutine(PowerUpDecreaseAnimation(0.05f));
-            IncrementScore();
-            ball.RestartGame();
+            ball.xInitialForce += 100;
         }
     }
 
@@ -85,15 +84,25 @@ public class PlayerControl : MonoBehaviour
     {
         // If player collides with ball, record contact point
         if (!other.gameObject.name.Equals("Ball")) return;
-        ultiPowerUp.value += hitPowerUp;
+        float targetValue = ultiSlider.value + hitPowerUp;
+        StartCoroutine(PowerUpIncreaseAnimation(0.005f, targetValue));
         lastContactPoint = other.GetContact(0);
     }
 
     private IEnumerator PowerUpDecreaseAnimation(float waitTime)
     {
-        for (float i = ultiPowerUp.value; i >= 0; i-=0.1f)
+        for (float i = ultiSlider.value; i >= 0; i-=0.1f)
         {
-            ultiPowerUp.value = i;
+            ultiSlider.value = i;
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    private IEnumerator PowerUpIncreaseAnimation(float waitTime, float targetValue)
+    {
+        for (float i = ultiSlider.value; i <= targetValue; i += 0.01f)
+        {
+            ultiSlider.value = i;
             yield return new WaitForSeconds(waitTime);
         }
     }
@@ -108,7 +117,8 @@ public class PlayerControl : MonoBehaviour
         CheckWinner();
         ball.IsPlayer1 = false;
         ball.IsPlayer2 = false;
-        ultiPowerUp.value += scorePowerUp;
+        float targetValue = ultiSlider.value + scorePowerUp;
+        StartCoroutine(PowerUpIncreaseAnimation(0.005f, targetValue));
     }
 
     /// <summary>
@@ -117,7 +127,7 @@ public class PlayerControl : MonoBehaviour
     public void ResetScore()
     {
         score = 0;
-        ultiPowerUp.value = 0; // Reset power
+        ultiSlider.value = 0; // Reset power
     }
 
     /// <summary>

@@ -346,6 +346,11 @@ PrefabInstance:
       propertyPath: resumeText
       value: 
       objectReference: {fileID: 276596615}
+    - target: {fileID: 4524045861609855307, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
+        type: 3}
+      propertyPath: ultiSlider
+      value: 
+      objectReference: {fileID: 328183055}
     - target: {fileID: 4653807303426304561, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
         type: 3}
       propertyPath: m_Color.r
@@ -1428,6 +1433,7 @@ MonoBehaviour:
   yInitialForce: 0
   isPlayer1: 0
   isPlayer2: 0
+  xInitialForceOrigin: 0
 --- !u!58 &499353780
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2406,7 +2412,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 499353779}
   ballAtCollision: {fileID: 957267003}
-  powerUpObject: {fileID: 422648956}
 --- !u!114 &1054538034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3898,6 +3903,11 @@ PrefabInstance:
       propertyPath: resumeText
       value: 
       objectReference: {fileID: 276596615}
+    - target: {fileID: 4524045861609855307, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
+        type: 3}
+      propertyPath: ultiSlider
+      value: 
+      objectReference: {fileID: 479568972}
     - target: {fileID: 4653807303426304561, guid: a91c12cc1f44a8241bbb8b2bd7538fd2,
         type: 3}
       propertyPath: m_Color.r
