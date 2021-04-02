@@ -4,11 +4,19 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
+    [Header("User Interface")]
     [SerializeField] private Slider ultiPowerUp;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private GameObject transparentBg;
+    [SerializeField] private Text gamePausedText;
+    [SerializeField] private Text resumeText;
+    [SerializeField] private Text winnerText;
+    
+    [Header("Control")]
+    [SerializeField] private BallControl ball;
     [SerializeField] private float hitPowerUp,
         scorePowerUp;
-    [SerializeField] private BallControl ball;
-    
+
     // Buttons to move
     public KeyCode upButton = KeyCode.W,
         downButton = KeyCode.S;
@@ -96,6 +104,8 @@ public class PlayerControl : MonoBehaviour
     public void IncrementScore()
     {
         score++;
+        UpdateScoreText(score);
+        CheckWinner();
         ball.IsPlayer1 = false;
         ball.IsPlayer2 = false;
         ultiPowerUp.value += scorePowerUp;
@@ -108,5 +118,29 @@ public class PlayerControl : MonoBehaviour
     {
         score = 0;
         ultiPowerUp.value = 0; // Reset power
+    }
+
+    /// <summary>
+    /// Update score text with player's score
+    /// </summary>
+    /// <param name="value">Player's score</param>
+    private void UpdateScoreText(int value)
+    {
+        scoreText.text = value.ToString();
+    }
+    
+    /// <summary>
+    /// Check score if score is maxScore
+    /// </summary>
+    private void CheckWinner()
+    {
+        if (score == 5)
+        {
+            transparentBg.SetActive(true);
+            resumeText.gameObject.SetActive(false);
+            gamePausedText.gameObject.SetActive(false);
+            winnerText.gameObject.SetActive(true);
+            winnerText.text = $"{gameObject.name} WON!!";
+        }
     }
 }
