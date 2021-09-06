@@ -2,95 +2,97 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+namespace GamePlay
 {
-    [SerializeField] private Text debugInfoText;
-    [SerializeField] private GameObject debugInfo;
-    // [SerializeField] private GameObject transparentBg;
-    
-    // Trajectory for drawing ball trajectory prediction
-    public Trajectory trajectory;
-    
-    // Player 1
-    public PlayerControl player1;
-
-    // Player 2
-    public PlayerControl player2;
-
-    // Ball
-    public BallControl ball;
-    private Rigidbody2D ballRigidbody;
-    private CircleCollider2D ballCollider;
-    
-    // Max score
-    public int maxScore;
-    
-    private bool isDebugWindowShown;
-
-    public bool IsDebugWindowShown
+    public class GameManager : MonoBehaviour
     {
-        get => isDebugWindowShown;
-        set => isDebugWindowShown = value;
-    }
+        [SerializeField] private Text debugInfoText;
+        [SerializeField] private GameObject debugInfo;
+        // [SerializeField] private GameObject transparentBg;
+    
+        // Trajectory for drawing ball trajectory prediction
+        public Trajectory trajectory;
+    
+        // Player 1
+        public PlayerControl player1;
 
-    private void Start()
-    {
-        // Get components
-        ballRigidbody = ball.GetComponent<Rigidbody2D>();
-        ballCollider = ball.GetComponent<CircleCollider2D>();
-    }
+        // Player 2
+        public PlayerControl player2;
 
-    private void Update()
-    {
-        // If isDebugWindowShown, show text area for debug window
-        if (isDebugWindowShown)
+        // Ball
+        public BallControl ball;
+        private Rigidbody2D ballRigidbody;
+        private CircleCollider2D ballCollider;
+    
+        // Max score
+        public int maxScore;
+    
+        private bool isDebugWindowShown;
+
+        public bool IsDebugWindowShown
         {
-            // Save physic variables
-            float ballMass = ballRigidbody.mass;
-            Vector2 ballVelocity = ballRigidbody.velocity;
-            float ballSpeed = ballRigidbody.velocity.magnitude;
-            Vector2 ballMomentum = ballMass * ballVelocity;
-            float ballFriction = ballCollider.friction;
-
-            float impulsePlayer1X = player1.LastContactPoint.normalImpulse;
-            float impulsePlayer1Y = player1.LastContactPoint.tangentImpulse;
-            
-            float impulsePlayer2X = player2.LastContactPoint.normalImpulse;
-            float impulsePlayer2Y = player2.LastContactPoint.tangentImpulse;
-
-            string debugText =
-                $"Ball mass = {ballMass:0.##}\n" +
-                $"Ball velocity = {ballVelocity}\n" +
-                $"Ball speed = {ballSpeed:0.##}\n" +
-                $"Ball momentum = {ballMomentum}\n" +
-                $"Ball friction = {ballFriction:0.##}\n" +
-                $"Last impulse from player 1 = ({impulsePlayer1X:0.##}, {impulsePlayer1Y:0.##})\n" +
-                $"Last impulse from player 2 = ({impulsePlayer2X:0.##}, {impulsePlayer2Y:0.##})\n";
-
-            debugInfoText.text = debugText;
+            get => isDebugWindowShown;
+            set => isDebugWindowShown = value;
         }
-    }
 
-    /// <summary>
-    /// Restart game when restart button is pressed
-    /// </summary>
-    public void RestartGame()
-    {
-        SceneManager.LoadScene("Pong");
-    }
+        private void Start()
+        {
+            // Get components
+            ballRigidbody = ball.GetComponent<Rigidbody2D>();
+            ballCollider = ball.GetComponent<CircleCollider2D>();
+        }
+
+        private void Update()
+        {
+            // If isDebugWindowShown, show text area for debug window
+            if (isDebugWindowShown)
+            {
+                // Save physic variables
+                float ballMass = ballRigidbody.mass;
+                Vector2 ballVelocity = ballRigidbody.velocity;
+                float ballSpeed = ballVelocity.magnitude;
+                Vector2 ballMomentum = ballMass * ballVelocity;
+                float ballFriction = ballCollider.friction;
+
+                float impulsePlayer1X = player1.LastContactPoint.normalImpulse;
+                float impulsePlayer1Y = player1.LastContactPoint.tangentImpulse;
+            
+                float impulsePlayer2X = player2.LastContactPoint.normalImpulse;
+                float impulsePlayer2Y = player2.LastContactPoint.tangentImpulse;
+
+                string debugText =
+                    $"Ball mass = {ballMass:0.##}\n" +
+                    $"Ball velocity = {ballVelocity}\n" +
+                    $"Ball speed = {ballSpeed:0.##}\n" +
+                    $"Ball momentum = {ballMomentum}\n" +
+                    $"Ball friction = {ballFriction:0.##}\n" +
+                    $"Last impulse from player 1 = ({impulsePlayer1X:0.##}, {impulsePlayer1Y:0.##})\n" +
+                    $"Last impulse from player 2 = ({impulsePlayer2X:0.##}, {impulsePlayer2Y:0.##})\n";
+
+                debugInfoText.text = debugText;
+            }
+        }
+
+        /// <summary>
+        /// Restart game when restart button is pressed
+        /// </summary>
+        public void RestartGame()
+        {
+            SceneManager.LoadScene("Pong");
+        }
     
-    /// <summary>
-    /// To show debug info
-    /// </summary>
-    public void ToggleDebugInfo()
-    {
-        isDebugWindowShown = !isDebugWindowShown;
-        debugInfo.SetActive(isDebugWindowShown);
-        trajectory.enabled = !trajectory.enabled;
-    }
+        /// <summary>
+        /// To show debug info
+        /// </summary>
+        public void ToggleDebugInfo()
+        {
+            isDebugWindowShown = !isDebugWindowShown;
+            debugInfo.SetActive(isDebugWindowShown);
+            trajectory.enabled = !trajectory.enabled;
+        }
     
-    // Uncomment this if want to see how to make GUI programmatically
-    /*private void OnGUI()
+        // Uncomment this if want to see how to make GUI programmatically
+        /*private void OnGUI()
     {
         // Show player1's score in the left and
         GUI.Label(new Rect(Screen.width/2 - 150 - 12, 20, 100, 100), "" + player1.Score);
@@ -171,4 +173,5 @@ public class GameManager : MonoBehaviour
             trajectory.enabled = !trajectory.enabled;
         }
     }*/
+    }
 }
