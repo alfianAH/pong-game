@@ -3,8 +3,9 @@ using System.Globalization;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityConfig
+namespace UnityConfig.Editor
 {
+    
     [CustomPropertyDrawer(typeof(ArrayElementTitleAttribute))]
     public class ArrayElementTitleDrawer: PropertyDrawer
     {
