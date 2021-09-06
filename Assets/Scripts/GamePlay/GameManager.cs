@@ -12,7 +12,7 @@ namespace GamePlay
         // [SerializeField] private GameObject transparentBg;
     
         // Trajectory for drawing ball trajectory prediction
-        public Trajectory trajectory;
+        private Trajectory trajectory;
     
         // Player 1
         public PlayerControl player1;
@@ -39,6 +39,7 @@ namespace GamePlay
         private void Start()
         {
             ball = BallControl.Instance;
+            trajectory = Trajectory.Instance;
             
             // Get components
             ballRigidbody = ball.GetComponent<Rigidbody2D>();

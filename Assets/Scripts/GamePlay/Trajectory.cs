@@ -2,7 +2,7 @@
 
 namespace GamePlay
 {
-    public class Trajectory : MonoBehaviour
+    public class Trajectory : SingletonBaseClass<Trajectory>
     {
         // Ball's components
         private BallControl ball;
