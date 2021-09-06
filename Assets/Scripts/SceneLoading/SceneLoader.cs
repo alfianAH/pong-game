@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace SceneLoading
         /// </summary>
         public void PlayGame(string sceneName)
         {
+            AudioManager.Instance.Play(ListSound.ButtonClick);
             StartCoroutine(LoadAsyncScene(sceneName));
         }
     
@@ -39,6 +41,7 @@ namespace SceneLoading
         /// </summary>
         public void ExitGame()
         {
+            AudioManager.Instance.Play(ListSound.ButtonClick);
             Application.Quit();
         }
 
@@ -48,6 +51,7 @@ namespace SceneLoading
         /// <param name="timeScale"></param>
         public void PauseOrResumeGame(float timeScale)
         {
+            AudioManager.Instance.Play(ListSound.ButtonClick);
             Time.timeScale = timeScale;
         }
 
@@ -56,6 +60,7 @@ namespace SceneLoading
         /// </summary>
         public void BackToHome(string sceneName)
         {
+            AudioManager.Instance.Play(ListSound.ButtonClick);
             StartCoroutine(LoadAsyncScene(sceneName));
         }
     }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Audio;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace GamePlay
@@ -41,6 +42,7 @@ namespace GamePlay
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            AudioManager.Instance.Play(ListSound.BallHit);
             // If other game object is player, ...
             if (!other.gameObject.CompareTag("Player")) return;
             // Check player's name

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Audio;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -78,6 +79,7 @@ namespace GamePlay
         /// </summary>
         public void RestartGame()
         {
+            AudioManager.Instance.Play(ListSound.ButtonClick);
             SceneManager.LoadScene("Pong");
         }
     
@@ -86,6 +88,7 @@ namespace GamePlay
         /// </summary>
         public void ToggleDebugInfo()
         {
+            AudioManager.Instance.Play(ListSound.ButtonClick);
             isDebugWindowShown = !isDebugWindowShown;
             debugInfo.SetActive(isDebugWindowShown);
             trajectory.enabled = !trajectory.enabled;
