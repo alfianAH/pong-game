@@ -5,7 +5,7 @@ namespace GamePlay
     public class Trajectory : MonoBehaviour
     {
         // Ball's components
-        public BallControl ball;
+        private BallControl ball;
         private CircleCollider2D ballCollider;
         private Rigidbody2D ballRigidbody;
 
@@ -13,6 +13,8 @@ namespace GamePlay
     
         private void Start()
         {
+            ball = BallControl.Instance;
+                
             ballCollider = ball.GetComponent<CircleCollider2D>();
             ballRigidbody = ball.GetComponent<Rigidbody2D>();
         }

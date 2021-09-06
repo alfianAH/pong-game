@@ -7,7 +7,7 @@ namespace GamePlay
     {
         [SerializeField] private PlayerControl player1, 
             player2;
-        [SerializeField] private BallControl ball;
+        private BallControl ball;
         [SerializeField] private float maxLength = 5f,
             powerUpMaxTime = 5f,
             xBoundary = 3f;
@@ -21,6 +21,8 @@ namespace GamePlay
     
         private void Awake()
         {
+            ball = BallControl.Instance;
+            
             powerUpTransform = GetComponent<Transform>();
             yBoundaryOrigin = player1.yBoundary;
         

@@ -15,7 +15,7 @@ namespace GamePlay
         [SerializeField] private Text winnerText;
     
         [Header("Control")]
-        [SerializeField] private BallControl ball;
+        private BallControl ball;
         [SerializeField] private float hitPowerUp,
             scorePowerUp;
 
@@ -40,6 +40,7 @@ namespace GamePlay
 
         private void Start()
         {
+            ball = BallControl.Instance;
             rb2D = GetComponent<Rigidbody2D>();
         }
 

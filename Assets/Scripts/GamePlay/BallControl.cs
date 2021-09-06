@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace GamePlay
 {
-    public class BallControl : MonoBehaviour
+    public class BallControl : SingletonBaseClass<BallControl>
     {
         // Initial Force to push the ball
         public float xInitialForce = 50,

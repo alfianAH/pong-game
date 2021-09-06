@@ -21,7 +21,7 @@ namespace GamePlay
         public PlayerControl player2;
 
         // Ball
-        public BallControl ball;
+        private BallControl ball;
         private Rigidbody2D ballRigidbody;
         private CircleCollider2D ballCollider;
     
@@ -38,6 +38,8 @@ namespace GamePlay
 
         private void Start()
         {
+            ball = BallControl.Instance;
+            
             // Get components
             ballRigidbody = ball.GetComponent<Rigidbody2D>();
             ballCollider = ball.GetComponent<CircleCollider2D>();

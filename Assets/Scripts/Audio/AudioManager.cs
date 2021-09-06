@@ -21,7 +21,7 @@ namespace Audio
 
                     if (instance == null)
                     {
-                        Debug.LogError($"{LOG} tidak ditemukan");
+                        Debug.LogError($"{LOG} not found");
                     }
                 }
 
