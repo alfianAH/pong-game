@@ -61,7 +61,7 @@ namespace GamePlay
                     Vector2 inVector = (offsetHitPoint - ball.TrajectoryOrigin).normalized;
                 
                     // Calculate outVector
-                    Vector2 outVector = Vector2.zero;
+                    Vector2 outVector;
                     if(circleCastHit2D.collider.CompareTag("Player"))
                     {
                         /*
